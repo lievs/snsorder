@@ -3,8 +3,19 @@
     <head>
         <link rel="stylesheet" href="{% static 'snsorder/styles.css' %}">
     </head>
-    <body class="bg-sky-500">
-        <h1>This is index templates</h1>
+    <body>
+        <nav>
+            <div>
+                <div>
+                    <div>
+                        <div class="flex">
+                            <img class="h-8 w-8" src="{% static 'snsorder/images/logo.png' %}" alt="logo">
+                            <span class="text-xl">   SNS Order</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
         <h4>
             {% for item in items%}
             <a href = "{% url 'detail' item.id %}">
