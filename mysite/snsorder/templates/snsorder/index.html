@@ -1,30 +1,10 @@
 {% extends "snsorder/base.html" %}
-{% load static %}
 {% block content %}
-    <nav class="bg-white shadow-lg">
-        <div class="max-w-6x1 mx-auto px-4">
-            <div class="flex justify-between">
-                <div class="flex space-x-7">
-                    <div>
-                        <a href="#" class="flex items-center px2 py-4">
-                               <img class="h-8 w-8" src="{% static 'snsorder/images/logo.png' %}" alt="logo">
-                                <span class="text-gray-500 font-semibold text-xl">   SNS Order</span>
-                        </a>
-                    </div>
-                    <div class="items-center flex space-x-1">
-                        <a href="#" class="py-4 px-2 text-gray-500 font-semibold border-b-4 border-green-500">Home</a>
-                        <a href="#" class="py-4 px-2 text-gray-500 font-semibold">About</a>
-                        <a href="#" class="py-4 px-2 text-gray-500 font-semibold">Contacts</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+
         <h4>
             {% for item in items%}
             <a href = "{% url 'detail' item.id %}">
-            ID: {{item.id}}  Имя: {{item.name}} | Цена: {{item.price}} <br/>
-            Описание: {{item.description}} <br/> <br/>
+            ID: {{item.id}}  | Имя: {{item.name}} | Цена: {{item.price}} | {{item.description}} <br/>
             </a>
             {% endfor %}
         </h4>
