@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Product
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -18,16 +19,20 @@ def indexItem(request, my_id):
     }
     return render(request, "snsorder/detail.html", context)
 
-
+@login_required()
 def add_item(request):
     if request.method == "POST":
         name = request.POST.get("name")
         price = request.POST.get("price")
         description = request.POST.get("description")
         image = request.FILES["upload"]
-        item = Product(name=name, price=price, description=description, image=image)
+        seller = request.user
+        item = Product(
+            name=name, price=price, description=description, image=image, seller=seller
+        )
         item.save()
-    return render(request, "snsorder/additem.html" )
+    return render(request, "snsorder/additem.html")
+
 
 def update_item(request, my_id):
     item = Product.objects.get(id=my_id)
@@ -48,3 +53,4 @@ def delete_item(request, my_id):
         return redirect("/snsorder/")
     context = {"item": item}
     return render(request, "snsorder/deleteitem.html", context)
+

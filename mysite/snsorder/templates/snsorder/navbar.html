@@ -1,21 +1,34 @@
 {% load static %}
+
 <nav class="bg-white shadow-lg">
-    <div class="max-w-6x1 mx-auto px-4">
-        <div class="flex justify-between">
-            <div class="flex space-x-7">
-                <div>
-                    <a href="#" class="flex items-center px2 py-4">
-                        <img class="h-8 w-8" src="{% static 'snsorder/images/logo.png' %}" alt="logo">
-                        <span class="text-gray-500 font-semibold text-xl px-4">SNS Order</span>
-                    </a>
-                </div>
-                <div class="items-center flex space-x-1">
-                    <a href="#" class="py-4 px-2 text-gray-500 font-semibold border-b-4 border-green-500">Home</a>
-                    <a href="#" class="py-4 px-2 text-gray-500 font-semibold">About</a>
-                    <a href="#" class="py-4 px-2 text-gray-500 font-semibold">Contacts</a>
-                    <a href="#" class="py-4 px-2 text-gray-500 font-semibold">Place</a>
-                </div>
-            </div>
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex justify-between">
+        <div class="flex space-x-7">
+          <div >
+            <a href="{% url 'snsorder:index' %}" class="flex items-center px-2 py-4">
+            <img class="h-8 w-8" src="{% static 'snsorder/images/logo.png' %}" alt="logo" />
+            <span class="text-gray-500 font-semibold text-xl">|SNS Order|</span>
+          </a>
+          </div>
+          <div class="items-center flex space-x-1">
+            <a href="{% url 'snsorder:index' %}" class="py-4 px-2 text-gray-500 font-semibold border-b-4 border-green-500">Home</a>
+            <a href="{% url 'snsorder:add_item' %}" class="py-4 px-2 text-gray-500 font-semibold">
+                {% if user.is_authenticated and user.is_staff %}
+                    Add Item
+                {% else %}
+                    <!-- если пользователь не администратор или не аутентифицирован, не показывать ссылку -->
+                {% endif %}
+            </a>
+            <a href="#" class="py-4 px-2 text-gray-500 font-semibold">Contacts</a>
+            {% if user.is_authenticated %}
+
+              <a class="py-4 px-2 text-gray-500 font-semibold" href="{% url 'users:logout' %}">Logout</a>
+              <a class="py-4 px-2 text-gray-500 font-semibold" href="{% url 'users:profile' %}">Profile</a>
+              {% else %}
+              <a class="py-4 px-2 text-gray-500 font-semibold" href="{% url 'users:login' %}">Login</a>
+            {% endif %}
+          </div>
         </div>
-    </div>
+      </div>
+  </div>
 </nav>
